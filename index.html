@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div>
+    <input type="text" name="" id="inputBox">
+    <button type="button" id="btn">Search</button>
+    
+
+</div>
+<div class="mname"></div>
+<div class="lang">
+
+</div>
+<div class="popu">
+
+</div>
+    <img id="flag" style="height: 100%; width: 100%;" alt="Country Flag">
+
+</body>
+<script>
+    let input=document.querySelector("#inputBox")
+    let btnm=document.querySelector("button")
+    let flag=document.querySelector("#flag")
+    let mname=document.querySelector(".mname")
+    let lang=document.querySelector(".lang")
+    let popu=document.querySelector(".popu")
+    btnm.addEventListener(`click`,()=>{
+        axios.get(`https://restcountries.com/v3.1/name/${input.value.toLowerCase()}`)
+  .then(function (response) {
+    let country= response.data[0]
+    // flag.src=response.data[0].flags.png;
+    mname.innerText=response.data[0].altSpellings;
+    lang.innerText = "Languages: " + Object.values(country.languages).join(", ");
+    // lang.innerText=response.data[0].languages.eng;
+    popu.innerText=response.data[0].population;
+    flag.src=response.data[0].flags.png;
+
+
+
+    // handle success
+    // console.log(response.data[0]);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+    })
+
+</script>
+</html>

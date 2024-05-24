@@ -20,7 +20,7 @@
 <div class="popu">
 
 </div>
-    <img id="flag" style="height: 100%; width: 100%;" alt="Country Flag">
+    <img id="flag"  alt="Country Flag">
 
 </body>
 <script>
@@ -30,6 +30,7 @@
     let mname=document.querySelector(".mname")
     let lang=document.querySelector(".lang")
     let popu=document.querySelector(".popu")
+  
     btnm.addEventListener(`click`,()=>{
         axios.get(`https://restcountries.com/v3.1/name/${input.value.toLowerCase()}`)
   .then(function (response) {
@@ -40,11 +41,12 @@
     // lang.innerText=response.data[0].languages.eng;
     popu.innerText=response.data[0].population;
     flag.src=response.data[0].flags.png;
+    
 
 
 
     // handle success
-    // console.log(response.data[0]);
+    console.log(response.data[0]);
   })
   .catch(function (error) {
     // handle error

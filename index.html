@@ -1,58 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div>
-    <input type="text" name="" id="inputBox">
-    <button type="button" id="btn">Search</button>
-    
+  <div class="container">
+    <h1>🌍 Country Explorer</h1>
+    <div class="search-box">
+      <input id="inputBox" type="text" placeholder="Enter a country name..." />
+      <button id="btn"><span id="btnText">Search</span></button>
+      <div id="loader" class="loader" style="display:none;"></div>
+    </div>
 
+    <div class="result-card" id="result" style="display:none;">
+      <img id="flag" alt="Country Flag" />
+      <p class="mname"></p>
+      <p class="lang"></p>
+      <p class="popu"></p>
+    </div>
+
+    <div class="city-gallery" style="display:none;">
+      <h2>🏙️ Popular Places</h2>
+      <div id="cities"></div>
+    </div>
+    <div class="hotel-gallery">
+  <h3>Popular Hotels</h3>
+  <div class="hotels" id="hotels"></div>
 </div>
-<div class="mname"></div>
-<div class="lang">
+  </div>
 
-</div>
-<div class="popu">
-
-</div>
-    <img id="flag"  alt="Country Flag">
-
+  <script src="script.js"></script>
 </body>
-<script>
-    let input=document.querySelector("#inputBox")
-    let btnm=document.querySelector("button")
-    let flag=document.querySelector("#flag")
-    let mname=document.querySelector(".mname")
-    let lang=document.querySelector(".lang")
-    let popu=document.querySelector(".popu")
-  
-    btnm.addEventListener(`click`,()=>{
-        axios.get(`https://restcountries.com/v3.1/name/${input.value.toLowerCase()}`)
-  .then(function (response) {
-    let country= response.data[0]
-    // flag.src=response.data[0].flags.png;
-    mname.innerText=response.data[0].altSpellings;
-    lang.innerText = "Languages: " + Object.values(country.languages).join(", ");
-    // lang.innerText=response.data[0].languages.eng;
-    popu.innerText=response.data[0].population;
-    flag.src=response.data[0].flags.png;
-    
-
-
-
-    // handle success
-    console.log(response.data[0]);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-    })
-
-</script>
 </html>
